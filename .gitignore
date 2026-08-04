@@ -1,0 +1,11 @@
+# editor / OS junk
+.DS_Store
+Thumbs.db
+
+# local backups
+*.backup.html
+*.backup.css
+
+# personal, non-portfolio assets (kept on disk, never published)
+assets/PA to nyc refund*.jpg
+assets/refund confirmation*.jpg
