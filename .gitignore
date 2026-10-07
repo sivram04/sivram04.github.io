@@ -9,3 +9,9 @@ Thumbs.db
 # personal, non-portfolio assets (kept on disk, never published)
 assets/PA to nyc refund*.jpg
 assets/refund confirmation*.jpg
+
+# Local browser verification and screenshots
+.preview-qa/
+
+# Design working files: mockups, local preview server, design sidecar
+.impeccable/

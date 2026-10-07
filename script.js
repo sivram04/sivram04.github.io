@@ -1,271 +1,254 @@
-/* =========================================================
-   Interactive Data Story — behaviour
-   ========================================================= */
-(function () {
+/* Motion is progressive enhancement: every link, section and number works without this file. */
+(() => {
   "use strict";
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const root = document.documentElement, page = document.getElementById("page");
+  const svg = document.getElementById("graph"), bar = document.getElementById("bar"), main = document.querySelector("main");
+  const NS = "http://www.w3.org/2000/svg";
+  const mk = (tag, attrs, parent) => {
+    const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    parent.append(n);
+    return n;
+  };
+  // Hero order is top to bottom; after the two bends the same lines sit right to left in the gutter.
+  const KEYS = ["s", "c", "i", "a"], PARENT = { a: "s", i: "a", c: "s" };
+  const NAMES = { a: "Analytics", i: "AI & imaging", c: "Cloud & DevOps", s: "Software" };
+  const len = (name) => parseFloat(getComputedStyle(root).getPropertyValue(name)) * parseFloat(getComputedStyle(root).fontSize);
+  const laneKeys = (el) => (el.dataset.lanes || el.dataset.lane).split(" ");
+  let runs = [], stops = [], yTop = 0, ySpine = 0, drawn = false;
+root.classList.add("js");
 
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* ---------- Footer year ---------- */
-  var yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  /* ---------- Theme toggle ---------- */
-  var root = document.documentElement;
-  var stored = null;
-  try { stored = localStorage.getItem("theme"); } catch (e) {}
-  if (stored) root.setAttribute("data-theme", stored);
-
-  var themeBtn = document.getElementById("themeToggle");
-  if (themeBtn) {
-    themeBtn.addEventListener("click", function () {
-      var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
-      root.setAttribute("data-theme", next);
-      try { localStorage.setItem("theme", next); } catch (e) {}
-    });
-  }
-
-  /* ---------- Mobile nav ---------- */
-  var navToggle = document.getElementById("navToggle");
-  var navLinks = document.getElementById("navLinks");
-  if (navToggle && navLinks) {
-    navToggle.addEventListener("click", function () {
-      navLinks.classList.toggle("open");
-    });
-    navLinks.addEventListener("click", function (e) {
-      if (e.target.classList.contains("nav-link")) navLinks.classList.remove("open");
-    });
-  }
-
-  /* ---------- Scroll progress ---------- */
-  var progress = document.getElementById("scrollProgress");
-  function onScrollProgress() {
-    var h = document.documentElement;
-    var max = h.scrollHeight - h.clientHeight;
-    var p = max > 0 ? h.scrollTop / max : 0;
-    if (progress) progress.style.transform = "scaleX(" + p + ")";
-  }
-  window.addEventListener("scroll", onScrollProgress, { passive: true });
-  onScrollProgress();
-
-  /* ---------- Count-up animation ---------- */
-  function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
-
-  function formatNumber(value, decimals) {
-    var parts = value.toFixed(decimals).split(".");
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return parts.join(".");
-  }
-
-  function animateCount(el) {
-    var target = parseFloat(el.getAttribute("data-count"));
-    var decimals = parseInt(el.getAttribute("data-decimals") || "0", 10);
-    var prefix = el.getAttribute("data-prefix") || "";
-    var suffix = el.getAttribute("data-suffix") || "";
-    var dur = 1500;
-
-    var finalText = prefix + formatNumber(target, decimals) + suffix;
-    if (reduceMotion) {
-      el.textContent = finalText;
-      return;
-    }
-    var done = false;
-    var start = null;
-    function step(ts) {
-      if (start === null) start = ts;
-      var t = Math.min((ts - start) / dur, 1);
-      var val = target * easeOutCubic(t);
-      el.textContent = prefix + formatNumber(val, decimals) + suffix;
-      if (t < 1) requestAnimationFrame(step);
-      else { done = true; el.textContent = finalText; }
-    }
-    requestAnimationFrame(step);
-    // Safety net: if rAF never runs (e.g. page never composited), still show the value.
-    setTimeout(function () { if (!done) el.textContent = finalText; }, 2200);
-  }
-
-  /* ---------- Reveal + chart + counter observer ---------- */
-  var counted = new WeakSet();
-
-  function triggerCounters(container) {
-    var nums = container.querySelectorAll("[data-count]");
-    for (var i = 0; i < nums.length; i++) {
-      if (!counted.has(nums[i])) {
-        counted.add(nums[i]);
-        animateCount(nums[i]);
-      }
-    }
-  }
-
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("in");
-      triggerCounters(entry.target);
-      io.unobserve(entry.target);
-    });
-  }, { threshold: 0.18, rootMargin: "0px 0px -8% 0px" });
-
-  document.querySelectorAll(".reveal, .chart[data-observe]").forEach(function (el) {
-    io.observe(el);
+  // Name the lines on each item, so the encoding never depends on colour or on the gutter alone.
+  document.querySelectorAll("main [data-lanes]").forEach((item) => {
+    const slot = item.querySelector(".lines");
+    if (slot) slot.innerHTML = ["a", "i", "c", "s"].filter((k) => laneKeys(item).includes(k)).map((k) => `<span style="--lane:var(--${k})">${NAMES[k]}</span>`).join("");
   });
+  document.querySelectorAll(".strip, .weeks").forEach((ul) => [...ul.children].forEach((li, n) => li.style.setProperty("--n", n)));
 
-  // hero counters fire on load (above the fold)
-  var heroPanel = document.getElementById("heroPanel");
-  if (heroPanel) {
-    heroPanel.classList.add("in");
-    setTimeout(function () { triggerCounters(heroPanel); }, 300);
-  }
+  function layout() {
+    svg.setAttribute("height", 0);
+    const pr = page.getBoundingClientRect(), W = page.clientWidth, H = page.offsetHeight;
+    const gap = len("--gap"), rmin = len("--rmin"), pad = len("--pad"), sw = len("--sw");
+    const wide = matchMedia("(min-width: 900px)").matches;
+    svg.replaceChildren();
+    svg.setAttribute("width", W);
+    svg.setAttribute("height", H);
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    const gBase = mk("g", {}, svg), gLive = mk("g", {}, svg), gStops = mk("g", {}, svg), gHeads = mk("g", {}, svg);
+    const later = [];
+    const gx = (k) => pad + (3 - k) * gap, cx3 = gx(0) + rmin;
+    const mid = (el) => {
+      const r = el.getBoundingClientRect(), lh = parseFloat(getComputedStyle(el).lineHeight) || r.height;
+      return r.top - pr.top + Math.min(lh, r.height) / 2;
+    };
+    const yEnd = mid(document.getElementById("terminus"));
+    const bend = document.querySelector(".bend"), bendTop = bend.getBoundingClientRect().top - pr.top;
+    runs = [];
+    stops = [];
+    const addRun = (key, d, spine) => {
+      const p = mk("path", { d, class: "lane l-" + key }, gLive), L = p.getTotalLength();
+      p.style.strokeDasharray = `${L} ${L}`;
+      runs.push({ p, L, S: L - (yEnd - spine), head: mk("circle", { r: sw * 0.95, class: "head l-" + key }, gHeads) });
+    };
 
-  /* ---------- Scrollspy (active nav link) ---------- */
-  var sections = [].slice.call(document.querySelectorAll("section[id], header[id]"));
-  var linkMap = {};
-  document.querySelectorAll(".nav-link").forEach(function (a) {
-    var id = a.getAttribute("href").replace("#", "");
-    linkMap[id] = a;
-  });
-  var spy = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      var id = entry.target.getAttribute("id");
-      Object.keys(linkMap).forEach(function (k) { linkMap[k].classList.remove("active"); });
-      if (linkMap[id]) linkMap[id].classList.add("active");
-    });
-  }, { rootMargin: "-45% 0px -50% 0px" });
-  sections.forEach(function (s) { spy.observe(s); });
-
-  /* ---------- Command palette ---------- */
-  var overlay = document.getElementById("cmdk");
-  var input = document.getElementById("cmdkInput");
-  var list = document.getElementById("cmdkList");
-  var items = [];
-  var activeIdx = 0;
-
-  if (overlay && input && list) {
-    var commands = [
-      { label: "About", sub: "Section", href: "#about", icon: iconUser() },
-      { label: "Skills", sub: "Section", href: "#skills", icon: iconLayers() },
-      { label: "Work", sub: "Section", href: "#work", icon: iconChart() },
-      { label: "Experience", sub: "Section", href: "#experience", icon: iconBriefcase() },
-      { label: "Education", sub: "Section", href: "#education", icon: iconCap() },
-      { label: "Certifications", sub: "Section", href: "#certifications", icon: iconBadge() },
-      { label: "Contact", sub: "Section", href: "#contact", icon: iconMail() },
-      { label: "Download Résumé", sub: "PDF", href: "assets/Sivaram_Resume.pdf", external: true, icon: iconDownload() },
-      { label: "GitHub", sub: "External", href: "https://github.com/sivram04", external: true, icon: iconGithub() },
-      { label: "LinkedIn", sub: "External", href: "https://www.linkedin.com/in/sivaramvangavolu/", external: true, icon: iconLinkedin() },
-      { label: "Toggle theme", sub: "Action", action: "theme", icon: iconMoon() }
-    ];
-
-    function renderList(filter) {
-      list.innerHTML = "";
-      items = [];
-      var f = (filter || "").toLowerCase().trim();
-      var matched = commands.filter(function (c) { return c.label.toLowerCase().indexOf(f) !== -1; });
-      if (matched.length === 0) {
-        list.innerHTML = '<div class="cmdk-empty">No matches</div>';
-        return;
-      }
-      matched.forEach(function (c, i) {
-        var el = document.createElement("div");
-        el.className = "cmdk-item" + (i === 0 ? " active" : "");
-        el.innerHTML = '<span class="ci">' + c.icon + '</span><span class="cl">' + c.label + '</span><span class="cs">' + c.sub + "</span>";
-        el.addEventListener("click", function () { runCommand(c); });
-        el.addEventListener("mousemove", function () { setActive(i); });
-        list.appendChild(el);
-        items.push({ el: el, cmd: c });
+    if (wide) {
+      const lis = [...document.querySelectorAll(".map li")];
+      const rr = lis[0].querySelector(".rails").getBoundingClientRect();
+      const y0 = rr.top - pr.top + (rr.height - 3 * gap) / 2, yk = (k) => y0 + k * gap;
+      const sx = lis.map((li) => { const r = li.getBoundingClientRect(); return r.left - pr.left + r.width / 2; });
+      const cx1 = W - pad - rmin - 3 * gap, cy1 = y0 + rmin + 3 * gap;
+      const cy2 = Math.max(cy1, bendTop + bend.offsetHeight - 2 * rmin - 3 * gap), cy3 = cy2 + 2 * rmin + 3 * gap;
+      const T = 1500, span = cx1 - sx[0], intro = !still && !drawn;
+      yTop = y0;
+      ySpine = cy3;
+      KEYS.forEach((key, k) => {
+        const x = sx[lis.findIndex((li) => laneKeys(li).includes(key))], y = yk(k);
+        const r1 = rmin + (3 - k) * gap, r3 = rmin + k * gap;
+        let x0 = x, hero = `M${x} ${y}`;
+        if (PARENT[key]) {
+          const py = yk(KEYS.indexOf(PARENT[key])), bw = Math.min(90, (sx[1] - sx[0]) * 0.7);
+          x0 = x - bw;
+          hero = `M${x0} ${py}C${x0 + bw * 0.5} ${py} ${x - bw * 0.5} ${y} ${x} ${y}`;
+        }
+        hero += `H${cx1}`;
+        const tail = `A${r1} ${r1} 0 0 1 ${cx1 + r1} ${cy1}V${cy2}A${r1} ${r1} 0 0 1 ${cx1} ${cy2 + r1}H${cx3}A${r3} ${r3} 0 0 0 ${cx3 - r3} ${cy3}V${yEnd}`;
+        mk("path", { d: hero + tail, class: "track" }, gBase);
+        const hp = mk("path", { d: hero, class: "lane l-" + key }, gLive);
+        if (intro) {
+          const hl = hp.getTotalLength();
+          hp.style.strokeDasharray = `${hl} ${hl}`;
+          hp.style.strokeDashoffset = hl;
+          later.push(() => {
+            hp.style.transition = `stroke-dashoffset ${(T * (cx1 - x0)) / span}ms linear ${350 + (T * (x0 - sx[0])) / span}ms`;
+            hp.style.strokeDashoffset = 0;
+          });
+        }
+        addRun(key, `M${cx1} ${y}` + tail, cy3);
       });
-      activeIdx = 0;
-    }
-
-    function setActive(i) {
-      if (!items.length) return;
-      activeIdx = (i + items.length) % items.length;
-      items.forEach(function (it, idx) { it.el.classList.toggle("active", idx === activeIdx); });
-      items[activeIdx].el.scrollIntoView({ block: "nearest" });
-    }
-
-    function runCommand(c) {
-      closePalette();
-      if (c.action === "theme") { themeBtn && themeBtn.click(); return; }
-      if (c.external) { window.open(c.href, "_blank", "noopener"); return; }
-      var target = document.querySelector(c.href);
-      if (target) target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
-    }
-
-    function openPalette() {
-      overlay.classList.add("open");
-      input.value = "";
-      renderList("");
-      setTimeout(function () { input.focus(); }, 30);
-    }
-    function closePalette() { overlay.classList.remove("open"); }
-
-    input.addEventListener("input", function () { renderList(input.value); });
-    input.addEventListener("keydown", function (e) {
-      if (e.key === "ArrowDown") { e.preventDefault(); setActive(activeIdx + 1); }
-      else if (e.key === "ArrowUp") { e.preventDefault(); setActive(activeIdx - 1); }
-      else if (e.key === "Enter") { e.preventDefault(); if (items[activeIdx]) runCommand(items[activeIdx].cmd); }
-      else if (e.key === "Escape") { closePalette(); }
-    });
-    overlay.addEventListener("click", function (e) { if (e.target === overlay) closePalette(); });
-
-    document.addEventListener("keydown", function (e) {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
-        overlay.classList.contains("open") ? closePalette() : openPalette();
-      }
-    });
-
-    document.querySelectorAll("[data-open-cmdk]").forEach(function (b) {
-      b.addEventListener("click", openPalette);
-    });
-  }
-
-  /* ---------- Experience: expand / collapse responsibilities ---------- */
-  document.querySelectorAll(".xp-toggle").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var card = btn.closest(".xp-card");
-      if (!card) return;
-      var open = card.classList.toggle("open");
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
-      var label = btn.querySelector(".xp-label");
-      if (label) label.textContent = open
-        ? (btn.getAttribute("data-hide") || "Hide responsibilities")
-        : (btn.getAttribute("data-show") || "View responsibilities");
-    });
-  });
-
-  /* ---------- Contact form (Formspree) ---------- */
-  var form = document.getElementById("contactForm");
-  var statusEl = document.getElementById("formStatus");
-  if (form) {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      statusEl.textContent = "Sending…";
-      fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" }
-      }).then(function (res) {
-        if (!res.ok) throw new Error("fail");
-        statusEl.textContent = "✅ Message sent — I'll get back to you soon.";
-        form.reset();
-      }).catch(function () {
-        statusEl.textContent = "❌ Something went wrong. Please try again later.";
+      lis.forEach((li, n) => {
+        const ys = laneKeys(li).map((key) => yk(KEYS.indexOf(key))), g = mk("g", { class: "stop" }, gStops);
+        if (ys.length > 1) mk("line", { x1: sx[n], x2: sx[n], y1: Math.min(...ys), y2: Math.max(...ys), class: "link" }, g);
+        ys.forEach((y) => mk("circle", { cx: sx[n], cy: y, r: sw * 1.05, class: "ring" }, g));
+        if (intro) {
+          g.style.transitionDelay = `${350 + (T * (sx[n] - sx[0])) / span}ms`;
+          later.push(() => g.classList.add("on"));
+        } else g.classList.add("on");
       });
+    } else {
+      const cy3 = bendTop + bend.offsetHeight;
+      yTop = bendTop;
+      ySpine = cy3;
+      KEYS.forEach((key, k) => {
+        const r3 = rmin + k * gap, d = `M${W + 12} ${cy3 - r3}H${cx3}A${r3} ${r3} 0 0 0 ${cx3 - r3} ${cy3}V${yEnd}`;
+        mk("path", { d, class: "track" }, gBase);
+        addRun(key, d, cy3);
+      });
+    }
+
+    document.querySelectorAll("main [data-lanes], main [data-lane]").forEach((item) => {
+      const minor = item.hasAttribute("data-lane"), kind = !minor ? "major" : item.hasAttribute("data-gate") ? "gate" : "minor";
+      const y = mid(minor || item.matches("h2, h3") ? item : item.querySelector("h3") || item);
+      const xs = laneKeys(item).map((key) => gx(KEYS.indexOf(key))), g = mk("g", { class: "stop " + kind }, gStops);
+      if (xs.length > 1) mk("line", { x1: Math.min(...xs), x2: Math.max(...xs), y1: y, y2: y, class: "link" }, g);
+      xs.forEach((x) => {
+        if (kind === "gate") mk("rect", { x: x - sw * 0.8, y: y - sw * 0.8, width: sw * 1.6, height: sw * 1.6, transform: `rotate(45 ${x} ${y})`, class: "ring" }, g);
+        else mk("circle", { cx: x, cy: y, r: kind === "minor" ? sw * 0.7 : sw * 1.05, class: "ring" }, g);
+      });
+      stops.push({ y, g });
     });
+    update();
+    if (later.length) requestAnimationFrame(() => requestAnimationFrame(() => later.forEach((fn) => fn())));
   }
 
-  /* ---------- Inline icon helpers (for palette) ---------- */
-  function iconUser() { return '<svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4 0-8 2-8 5v1h16v-1c0-3-4-5-8-5Z"/></svg>'; }
-  function iconLayers() { return '<svg viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5Zm0 8L2 15l10 5 10-5Z"/></svg>'; }
-  function iconChart() { return '<svg viewBox="0 0 24 24"><path d="M4 20V10h3v10Zm6.5 0V4h3v16Zm6.5 0v-7h3v7Z"/></svg>'; }
-  function iconBriefcase() { return '<svg viewBox="0 0 24 24"><path d="M9 4h6a2 2 0 0 1 2 2v1h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h3V6a2 2 0 0 1 2-2Zm0 3h6V6H9Z"/></svg>'; }
-  function iconCap() { return '<svg viewBox="0 0 24 24"><path d="M12 3 1 8l11 5 9-4.09V15h2V8Zm-7 8.2v3.3c0 1.66 3.13 3 7 3s7-1.34 7-3v-3.3l-7 3.18Z"/></svg>'; }
-  function iconBadge() { return '<svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5Zm-1.2 13-3.3-3.3 1.4-1.4 1.9 1.9 4.3-4.3 1.4 1.4Z"/></svg>'; }
-  function iconMail() { return '<svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm9 7 8-5H4Z"/></svg>'; }
-  function iconDownload() { return '<svg viewBox="0 0 24 24"><path d="M11 4h2v7h3l-4 5-4-5h3Zm-6 13h14v2H5Z"/></svg>'; }
-  function iconMoon() { return '<svg viewBox="0 0 24 24"><path d="M20 14a8 8 0 0 1-10-10 8 8 0 1 0 10 10Z"/></svg>'; }
-  function iconGithub() { return '<svg viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12a11.5 11.5 0 0 0 7.9 10.9c.6.1.8-.2.8-.5v-1.9c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C17 4.5 18 4.8 18 4.8c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.6.8.5A11.5 11.5 0 0 0 23.5 12C23.5 5.7 18.3.5 12 .5Z"/></svg>'; }
-  function iconLinkedin() { return '<svg viewBox="0 0 24 24"><path d="M5 3.5A2.5 2.5 0 1 1 2.5 6 2.5 2.5 0 0 1 5 3.5ZM.5 8h4v15h-4Zm7 0h3.8v2h.1c.5-1 1.8-2.1 3.8-2.1 4 0 4.8 2.6 4.8 6V23h-4v-6.6c0-1.6 0-3.6-2.2-3.6s-2.5 1.7-2.5 3.5V23h-4Z"/></svg>'; }
+  // The head of every line follows the scroll: round the bends, then straight down the gutter.
+  function update() {
+    const atEnd = scrollY + innerHeight >= root.scrollHeight - 4;
+    const head = atEnd ? Infinity : scrollY + innerHeight * 0.64 * Math.min(1, scrollY / 240);
+    runs.forEach((r) => {
+      const n = still ? r.L : head <= yTop ? 0 : head < ySpine ? (r.S * (head - yTop)) / (ySpine - yTop) : Math.min(r.L, r.S + head - ySpine);
+      r.p.style.strokeDashoffset = r.L - n;
+      const pt = r.p.getPointAtLength(n);
+      r.head.setAttribute("cx", pt.x);
+      r.head.setAttribute("cy", pt.y);
+      r.head.style.opacity = !still && n > 2 && n < r.L - 2 ? 1 : 0;
+    });
+    stops.forEach((s) => {
+      const on = still || head >= s.y;
+      if (s.on !== on) { s.on = on; s.g.classList.toggle("on", on); }
+    });
+    bar.classList.toggle("stuck", scrollY > 8);
+  }
+  let queued = false;
+  addEventListener("scroll", () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => { queued = false; update(); });
+  }, { passive: true });
+
+  // Counts drawn one square each, in blocks of a hundred so they can be read as well as seen.
+const lit = new WeakMap();
+function units(cv, upto) {
+  const n = +cv.dataset.n, w = cv.clientWidth, dpr = devicePixelRatio || 1;
+  if (!w) return;
+  const gapB = Math.max(4, w * 0.022), p = (w - 4 * gapB) / 50, cell = p * 0.72, blocks = Math.ceil(n / 100), rows = Math.ceil(blocks / 5);
+  const lastFull = blocks - (rows - 1) * 5 > 1 || n % 100 === 0;
+  const h = (rows - 1) * (10 * p + gapB) + (lastFull ? 10 : Math.ceil((n % 100) / 10)) * p - (p - cell);
+  if (cv.width !== Math.round(w * dpr) || cv.height !== Math.round(h * dpr)) {
+    cv.style.height = h + "px";
+    cv.width = Math.round(w * dpr);
+    cv.height = Math.round(h * dpr);
+  }
+  const c = cv.getContext("2d"), on = getComputedStyle(cv).getPropertyValue("--lane").trim(), off = getComputedStyle(root).getPropertyValue("--track").trim();
+  c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  c.clearRect(0, 0, w, h);
+  for (let i = 0; i < n; i++) {
+    const b = Math.floor(i / 100), k = i % 100;
+    c.fillStyle = i < upto ? on : off;
+    c.fillRect((b % 5) * (10 * p + gapB) + (k % 10) * p, Math.floor(b / 5) * (10 * p + gapB) + Math.floor(k / 10) * p, cell, cell);
+  }
+}
+const sizeUnits = () => document.querySelectorAll(".units").forEach((cv) => units(cv, lit.get(cv) ? +cv.dataset.n : 0));
+function fillUnits(cv) {
+  lit.set(cv, true);
+  if (still) return units(cv, +cv.dataset.n);
+  const t0 = performance.now(), n = +cv.dataset.n;
+  (function step(now) {
+    const p = Math.min(1, (now - t0) / 1500);
+    units(cv, Math.round(n * (1 - Math.pow(1 - p, 3))));
+    if (p < 1) requestAnimationFrame(step);
+  })(t0);
+}
+
+const seen = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (!e.isIntersecting) return;
+    seen.unobserve(e.target);
+    if (e.target.matches(".units")) fillUnits(e.target);
+    else e.target.classList.add("in");
+  }), { threshold: 0.45 });
+  document.querySelectorAll(".pair, .tally, .strip, .weeks, .forecast, .units").forEach((el) => seen.observe(el));
+
+  // Follow one line: everything off that line steps back.
+  const riders = [...document.querySelectorAll("[data-ride]")];
+  riders.forEach((b) => b.addEventListener("click", () => {
+    const k = root.dataset.ride === b.dataset.ride ? "" : b.dataset.ride;
+    if (k) root.dataset.ride = k;
+    else delete root.dataset.ride;
+    riders.forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.ride === k)));
+  }));
+
+  // Section in view.
+  const links = [...document.querySelectorAll(".bar nav a")];
+  const spy = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (!e.isIntersecting) return;
+    links.forEach((a) => (a.getAttribute("href") === "#" + e.target.id ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current")));
+  }), { rootMargin: "-35% 0px -60% 0px" });
+  document.querySelectorAll("main section").forEach((s) => spy.observe(s));
+
+  // Certificate viewer.
+  const viewer = document.getElementById("viewer"), shot = viewer.querySelector("img");
+  let opener = null;
+  document.querySelectorAll("[data-cert]").forEach((b) => b.addEventListener("click", () => {
+    opener = b;
+    shot.src = b.dataset.cert;
+    shot.alt = b.dataset.title + " certificate";
+    viewer.querySelector("h2").textContent = b.dataset.title;
+    viewer.showModal();
+  }));
+  viewer.querySelector("button").addEventListener("click", () => viewer.close());
+  viewer.addEventListener("click", (e) => { if (e.target === viewer) viewer.close(); });
+  viewer.addEventListener("close", () => opener && opener.focus());
+
+  // The only network write on the page: the visitor's own, validated message.
+const form = document.getElementById("contactForm"), note = document.getElementById("formStatus");
+let sending = false;
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (sending || !form.reportValidity()) return;
+  sending = true;
+  const send = form.querySelector("button");
+  send.disabled = true;
+  note.textContent = "Sending your message…";
+  try {
+    const res = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+    if (!res.ok) throw new Error("not delivered");
+    note.textContent = "Message sent. Thank you, I will reply soon.";
+    form.reset();
+  } catch {
+    note.textContent = "That did not send. Please try again, or email sivmm29@gmail.com.";
+  } finally {
+    sending = false;
+    send.disabled = false;
+  }
+});
+
+// First layout once type and images have their final size; redo it whenever the content column changes size.
+  let wait = 0;
+  const redo = () => { sizeUnits(); layout(); };
+  const loaded = new Promise((done) => (document.readyState === "complete" ? done() : addEventListener("load", done, { once: true })));
+  Promise.all([document.fonts.ready, loaded]).then(() => {
+    redo();
+    setTimeout(() => { drawn = true; }, 2600);
+    new ResizeObserver(() => { clearTimeout(wait); wait = setTimeout(redo, 120); }).observe(main);
+  });
 })();
