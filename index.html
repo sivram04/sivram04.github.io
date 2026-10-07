@@ -114,7 +114,7 @@
               <h3>Cloud &amp; DevOps</h3>
               <button class="follow" data-ride="c" aria-pressed="false">Follow this line</button>
             </div>
-            <ul class="strip"><li>Azure ML GPU clusters</li><li>Azure Functions</li><li>Azure SQL</li><li>Blob Storage</li><li>Key Vault</li><li>GCP Cloud Run</li><li>Vertex AI</li><li>Docker</li><li>Git / GitHub</li><li>GitHub Actions CI</li></ul>
+            <ul class="strip"><li>Azure ML GPU clusters</li><li>Azure AI Foundry Content Safety</li><li>Azure Functions</li><li>Azure SQL</li><li>Blob Storage</li><li>Key Vault</li><li>GCP Cloud Run</li><li>Vertex AI</li><li>Docker</li><li>Git / GitHub</li><li>GitHub Actions CI</li></ul>
           </article>
           <article class="thread" data-lanes="s" style="--lane: var(--s)">
             <div>
@@ -148,11 +148,12 @@
                 <li data-lane="i">Built image pre- and post-processing: OpenCV face detection, <strong>1024px</strong> cropping and bad-crop filtering, then <strong>Real-ESRGAN</strong> upscaling to <strong>2048px</strong> and face refinement.</li>
                 <li data-lane="i" data-gate>Designed an <strong>AI image evaluation framework</strong> (ArcFace identity scoring, a quality gate, regression detection) that cut train-plus-generate time from about <strong>71 to 40 minutes (~44%)</strong> and raised identity fidelity from 76% to <strong>84% of the achievable ceiling</strong>.</li>
                 <li data-lane="c" data-gate>Deployed containerized training and inference on an autoscaling <strong>Azure ML</strong> cluster of <strong>NVIDIA A100</strong> GPUs; automated Azure Functions deployments and <strong>GitHub Actions CI with 1,387 tests</strong>.</li>
+                <li data-lane="c" data-gate>Integrated <strong>Azure AI Content Safety</strong> (Azure AI Foundry) to screen user uploads and generated outputs, with a fail-safe policy and audit logging.</li>
                 <li data-lane="a">Defined and tracked platform KPIs in <strong>SQL</strong>: <strong>84 users</strong>, <strong>1,175 headshots</strong>, a <strong>60% repeat-user rate</strong> and about <strong>5.6× job growth</strong> (13 to 73 jobs a month) across <strong>9 organizations and 166 seats</strong> in private beta.</li>
                 <li data-lane="c">Diagnosed a SQL connection defect behind <strong>223 HTTP 500s across 11 endpoints</strong> using Azure Application Insights.</li>
                 <li data-lane="s" data-gate>Wrote the <strong>architecture, decision and KPI / acceptance-criteria</strong> documents, and <strong>coordinated a 6-person team</strong> as backend lead.</li>
               </ul>
-              <p class="stack">Python · PyTorch · diffusers · OpenCV · Azure ML · Azure Functions · Azure SQL · GitHub Actions</p>
+              <p class="stack">Python · PyTorch · diffusers · OpenCV · Azure ML · Azure AI Foundry · Azure Functions · Azure SQL · GitHub Actions</p>
             </div>
             <div class="figs">
               <figure class="chart">
