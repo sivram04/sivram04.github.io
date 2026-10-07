@@ -1,4 +1,4 @@
-# Sivaram Vangavolu — Portfolio
+# Sivaram Vangavolu Portfolio
 
 Static portfolio for a data analyst and AI engineer, built with HTML, CSS and vanilla JavaScript. Published at https://sivram04.github.io. The current design ("Lineage") dates from October 2026.
 
