@@ -259,6 +259,29 @@
         <section id="projects">
           <h2>Projects</h2>
           <ol class="projects">
+            <li class="project" id="p-finance" data-lanes="a i c s">
+              <div>
+                <h3>Finance OS</h3>
+                <p class="meta">End-to-end finance data platform · 2026</p>
+                <p class="lines"></p>
+              </div>
+              <div class="text">
+                <p>Built one trusted view of a simulated AI company's finances, bringing the ledger, Stripe billing, payroll, cloud spend, CRM and <strong>196M+ API usage records</strong> into a governed dbt warehouse on DuckDB and BigQuery. Every KPI has one definition and traces from dashboard to journal line. Variances split automatically into volume, price and mix, and the month-end close runs <strong>19 reconciliation checks</strong>. Backtested ML models flag about <strong>$127K of ARR</strong> at churn risk, and a Gemini assistant answers in plain English from the company's own data, citing every source. The platform processes about <strong>795M rows</strong>, with DuckDB and BigQuery matching across <strong>175 models</strong>.</p>
+                <p class="stack">Python · dbt · DuckDB · BigQuery · scikit-learn · statsmodels · React · Gemini (Vertex AI) · Docker · Cloud Run · GitHub Actions</p>
+                <figure class="chart">
+                  <div class="pair" style="--lane: var(--i)">
+                    <p class="pt">Churn model ROC AUC, vs. old rules <b>+0.18</b></p>
+                    <dl>
+                      <div class="was" style="--v: 0.54"><dt>Rules</dt><dd><i></i><span>0.54</span></dd></div>
+                      <div class="now" style="--v: 0.72"><dt>Model</dt><dd><i></i><span>0.72</span></dd></div>
+                    </dl>
+                    <p class="ax" aria-hidden="true"><span>0</span><span>1.0</span></p>
+                  </div>
+                </figure>
+                <a class="more-link" href="https://finance-os-905768726552.us-central1.run.app" target="_blank" rel="noopener">Live demo <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5" /></svg></a>
+                <a class="more-link" href="https://github.com/sivram04/finance-os" target="_blank" rel="noopener">GitHub <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5" /></svg></a>
+              </div>
+            </li>
             <li class="project" id="p-port" data-lanes="a c s">
               <div>
                 <h3>Traffic Demand Forecasting &amp; Analytics (Port Authority of NY &amp; NJ)</h3>
