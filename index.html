@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sivaram Vangavolu | AI Engineer</title>
+    <meta name="description" content="Sivaram Vangavolu builds AI systems and the measurement that proves they work. AI engineer in Columbus, Ohio." />
+    <meta name="theme-color" content="#f1f4f6" />
+    <meta property="og:title" content="Sivaram Vangavolu | AI Engineer" />
+    <meta property="og:description" content="I build AI systems, then build the measurement that proves they work." />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400..900&family=Overpass+Mono:wght@400..600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css?v=e20faf1415d3" />
+    <script src="script.js?v=413f7d66c339" defer></script>
+  </head>
+  <body>
+    <!--
+    THESIS: A career drawn as a data-lineage graph. Four threads (Analytics, AI, Cloud, Software) run the whole page, and every role, project and certificate is a station on the threads it used. Refuses the hero, card grid and dotted timeline.
+    OWN-WORLD: Cool grey ground, ink type, four colour-blind-safe lines, white station rings with ink strokes, pill controls, Overpass and Overpass Mono. Charts are lines leaving one origin, and counts of single marks.
+    STORY: See both halves converge, check the numbers, follow one line, write to him.
+    FIRST VIEWPORT: Name top left at display scale, portrait in a station ring top right, the 2019-to-now line map across the full width below; resume and contact actions under the lede.
+    FORM: Lineage graph in transit-map idiom. Direction requested by the user after the seed 647bd7bd round.
+    -->
+    <a class="skip" href="#summary">Skip to content</a>
+    <div class="page" id="page">
+      <svg id="graph" aria-hidden="true"></svg>
+      <header class="bar" id="bar">
+        <a class="mark" href="#top" aria-label="Sivaram Vangavolu, top of page">sv.</a>
+        <nav aria-label="Sections">
+          <a href="#summary">Summary</a><a href="#skills">Skills</a><a href="#experience">Experience</a
+          ><a href="#projects">Projects</a><a href="#certificates">Certificates</a
+          ><a href="#voluntary">Voluntary</a><a href="#contact">Contact</a>
+        </nav>
+        <div class="ride" role="group" aria-label="Follow one line">
+          <span>Follow</span>
+          <button data-ride="a" aria-pressed="false" aria-label="Follow the Analytics line" title="Analytics" style="--lane: var(--a)"><i></i></button>
+          <button data-ride="i" aria-pressed="false" aria-label="Follow the AI and imaging line" title="AI &amp; imaging" style="--lane: var(--i)"><i></i></button>
+          <button data-ride="c" aria-pressed="false" aria-label="Follow the Cloud and DevOps line" title="Cloud &amp; DevOps" style="--lane: var(--c)"><i></i></button>
+          <button data-ride="s" aria-pressed="false" aria-label="Follow the Software line" title="Software" style="--lane: var(--s)"><i></i></button>
+        </div>
+        <a class="cv" href="assets/Sivaram_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+      </header>
+
+      <section class="hero" id="top">
+        <div>
+          <h1><span>Sivaram</span><span style="--d: 0.08s">Vangavolu</span></h1>
+          <p class="role-line rise" style="--d: 0.2s">AI Engineer</p>
+          <p class="lede rise" style="--d: 0.28s">I build AI systems, then build the measurement that proves they work.</p>
+          <p class="where rise" style="--d: 0.34s">Columbus, Ohio · open to relocation</p>
+          <div class="actions rise" style="--d: 0.42s">
+            <a class="btn solid" href="assets/Sivaram_Resume.pdf" target="_blank" rel="noopener">Read the résumé <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5" /></svg></a>
+            <a class="btn line" href="#contact">Get in touch</a>
+          </div>
+        </div>
+        <figure class="you rise" style="--d: 0.15s"><img src="assets/Portrait.jpg" alt="Sivaram Vangavolu" width="1008" height="1008" /></figure>
+        <ol class="map" aria-label="Career so far, drawn as four lines">
+          <li data-lanes="s" style="--n: 0"><a href="#summary">B.E. Computer Science</a><span class="rails"></span><time>2019</time></li>
+          <li data-lanes="a i c s" style="--n: 1"><a href="#x-accenture">AI Engineer, Accenture</a><span class="rails"></span><time>2022</time></li>
+          <li data-lanes="s" style="--n: 2"><a href="#summary">B.E. completed</a><span class="rails"></span><time>2023</time></li>
+          <li data-lanes="a" style="--n: 3"><a href="#summary">M.S. Business Analytics</a><span class="rails"></span><time>2024</time></li>
+          <li data-lanes="i c s" style="--n: 4"><a href="#x-ms">AI Engineer, Morgan Stanley</a><span class="rails"></span><time>2025</time></li>
+          <li data-lanes="a i s" style="--n: 5"><a href="#x-lakshyaa">Founder, Lakshyaa.ai</a><span class="rails"></span><time>2026</time></li>
+        </ol>
+      </section>
+      <div class="bend" aria-hidden="true"></div>
+
+      <main>
+        <section id="summary">
+          <h2>I build the model, then the measurement that says whether it works.</h2>
+          <div class="prose">
+            <p>I am an AI engineer with 3+ years of experience designing, building and deploying generative AI, LLM and machine learning applications in financial services and enterprise environments, including Morgan Stanley.</p>
+            <p>I specialize in agentic AI and multi-agent orchestration with LangGraph and LangChain, Retrieval-Augmented Generation with hybrid search, and LLM evaluation with LangSmith, RAGAS and DeepEval. I ship document intelligence pipelines, FastAPI inference services, AI guardrails and LLMOps workflows on AWS, Azure and GCP.</p>
+            <p>Along the way I have improved response relevance by 40%, cut manual review effort by 65% and reduced inference costs by 22% for 2,000+ users. I also founded Lakshyaa.ai, where I build multi-agent decision-support systems on Google Vertex AI.</p>
+          </div>
+          <ul class="edu">
+            <li data-lanes="a">
+              <h3>M.S. Business Analytics</h3>
+              <p>University of New Haven, West Haven, CT<br />Aug 2024 – Dec 2025</p>
+            </li>
+            <li data-lanes="s">
+              <h3>B.E. Computer Science</h3>
+              <p>Jawaharlal Nehru Technological University, Kakinada, India<br />Aug 2019 – May 2023</p>
+            </li>
+          </ul>
+        </section>
+
+        <section id="skills">
+          <h2>Skills, drawn as four lines</h2>
+          <p class="note">Every role, project and certificate below is marked on the lines it actually used. Follow one to see only that thread.</p>
+          <article class="thread" data-lanes="i" style="--lane: var(--i)">
+            <div>
+              <h3>Generative AI &amp; LLMs</h3>
+              <button class="follow" data-ride="i" aria-pressed="false">Follow this line</button>
+            </div>
+            <ul class="strip"><li>Large Language Models (LLMs)</li><li>OpenAI GPT</li><li>Anthropic Claude</li><li>Google Gemini</li><li>Llama</li><li>Mistral</li><li>Azure OpenAI</li><li>Amazon Bedrock</li><li>Google Vertex AI</li><li>Hugging Face Transformers</li></ul>
+          </article>
+          <article class="thread" data-lanes="i" style="--lane: var(--i)">
+            <div><h3>Agentic AI</h3></div>
+            <ul class="strip"><li>LangGraph</li><li>LangChain</li><li>LlamaIndex</li><li>CrewAI</li><li>AutoGen</li><li>DSPy</li><li>Model Context Protocol (MCP)</li><li>Tool calling</li><li>Function calling</li><li>Multi-agent systems</li><li>Agent memory</li><li>Human-in-the-loop</li></ul>
+          </article>
+          <article class="thread" data-lanes="i" style="--lane: var(--i)">
+            <div><h3>Retrieval-Augmented Generation (RAG)</h3></div>
+            <ul class="strip"><li>Agentic RAG</li><li>GraphRAG</li><li>Hybrid search</li><li>BM25</li><li>Semantic search</li><li>Vector search</li><li>Embeddings</li><li>Reranking</li><li>Chunking</li><li>Pinecone</li><li>pgvector</li><li>Weaviate</li><li>FAISS</li><li>Qdrant</li><li>Elasticsearch</li><li>Neo4j</li></ul>
+          </article>
+          <article class="thread" data-lanes="i" style="--lane: var(--i)">
+            <div><h3>Prompt engineering, fine-tuning &amp; serving</h3></div>
+            <ul class="strip"><li>Context engineering</li><li>Structured outputs</li><li>Few-shot prompting</li><li>Chain-of-thought prompting</li><li>Prompt versioning</li><li>LoRA</li><li>QLoRA</li><li>PEFT</li><li>vLLM</li><li>Ollama</li><li>Quantization</li><li>Semantic caching</li><li>LiteLLM</li><li>Model routing</li><li>Inference optimization</li></ul>
+          </article>
+          <article class="thread" data-lanes="a" style="--lane: var(--a)">
+            <div>
+              <h3>Machine learning &amp; deep learning</h3>
+              <button class="follow" data-ride="a" aria-pressed="false">Follow this line</button>
+            </div>
+            <ul class="strip"><li>PyTorch</li><li>TensorFlow</li><li>Scikit-learn</li><li>XGBoost</li><li>LightGBM</li><li>Natural Language Processing (NLP)</li><li>Deep learning</li><li>Anomaly detection</li><li>Fraud detection</li><li>Time-series forecasting</li><li>Feature engineering</li></ul>
+          </article>
+          <article class="thread" data-lanes="c" style="--lane: var(--c)">
+            <div>
+              <h3>MLOps, data engineering &amp; cloud</h3>
+              <button class="follow" data-ride="c" aria-pressed="false">Follow this line</button>
+            </div>
+            <ul class="strip"><li>MLflow</li><li>Weights &amp; Biases</li><li>Apache Airflow</li><li>Apache Kafka</li><li>PySpark</li><li>Databricks</li><li>Snowflake</li><li>Docker</li><li>Kubernetes</li><li>CI/CD</li><li>GitHub Actions</li><li>Model deployment</li><li>Model monitoring</li><li>Drift detection</li><li>AWS (SageMaker, Lambda, EKS)</li><li>Microsoft Azure</li><li>Google Cloud Platform (GCP)</li></ul>
+          </article>
+          <article class="thread" data-lanes="s" style="--lane: var(--s)">
+            <div>
+              <h3>Languages, backend &amp; databases</h3>
+              <button class="follow" data-ride="s" aria-pressed="false">Follow this line</button>
+            </div>
+            <ul class="strip"><li>Python</li><li>SQL</li><li>TypeScript</li><li>Java</li><li>FastAPI</li><li>AsyncIO</li><li>Pydantic</li><li>SQLAlchemy</li><li>REST APIs</li><li>GraphQL</li><li>Microservices</li><li>Event-driven architecture</li><li>PostgreSQL</li><li>Redis</li><li>MongoDB</li><li>DynamoDB</li><li>Celery</li><li>Git</li><li>Linux</li><li>Pytest</li><li>Agile / Scrum</li></ul>
+          </article>
+          <article class="thread gates" style="--lane: var(--ink)">
+            <div>
+              <h3>LLM evaluation &amp; responsible AI</h3>
+              <p class="meta">The gates on every line. A diamond on a line below marks one.</p>
+            </div>
+            <ul class="strip"><li>LangSmith</li><li>Langfuse</li><li>Arize Phoenix</li><li>RAGAS</li><li>DeepEval</li><li>LLM-as-a-Judge</li><li>Golden datasets</li><li>Regression testing</li><li>A/B testing</li><li>OpenTelemetry</li><li>Prometheus</li><li>Grafana</li><li>NeMo Guardrails</li><li>Guardrails AI</li><li>Hallucination detection</li><li>PII redaction</li><li>Prompt injection defense</li><li>AI governance</li><li>Model risk management</li></ul>
+          </article>
+        </section>
+
+        <section id="experience">
+          <h2>Experience</h2>
+          <article class="role" id="x-ms" data-lanes="i c s">
+            <header>
+              <h3>AI Engineer</h3>
+              <p class="org">Morgan Stanley<span>USA</span></p>
+              <p class="when">Aug 2025 – present</p>
+              <p class="lines"></p>
+            </header>
+            <div>
+              <p class="lead">Production generative AI for financial research and enterprise knowledge work: RAG, hybrid search, agentic workflows, and the evaluation and guardrails that make them safe to ship in a regulated bank.</p>
+              <ul class="points">
+                <li data-lane="i">Designed and deployed production <strong>Retrieval-Augmented Generation (RAG)</strong> applications using Python, LangChain, Azure OpenAI and vector search, with iterative prompt engineering on curated evaluation sets, improving response relevance by <strong>40%</strong> for <strong>2,000+ internal users</strong>.</li>
+                <li data-lane="i">Engineered a <strong>hybrid search</strong> retrieval pipeline over <strong>500K+ enterprise documents</strong> combining BM25, dense embeddings, cross-encoder reranking and optimized chunking, grounding LLM responses in accurate financial context.</li>
+                <li data-lane="i">Built stateful <strong>agentic AI workflows in LangGraph</strong> with tool calling, persistent agent memory and human-in-the-loop approval checkpoints to orchestrate multi-step research and document review.</li>
+                <li data-lane="i">Developed end-to-end <strong>document intelligence pipelines</strong> using OCR, NLP and LLMs with Pydantic structured outputs and schema validation, reducing manual review effort by <strong>65%</strong>.</li>
+                <li data-lane="s">Built asynchronous LLM inference APIs with <strong>FastAPI</strong>, AsyncIO, SQLAlchemy, Apache Kafka, Celery and Redis for event-driven processing, serving <strong>10K+ daily requests</strong> at under <strong>2-second p95 latency</strong>.</li>
+                <li data-lane="c" data-gate>Established an automated <strong>LLM evaluation framework</strong> with LangSmith, RAGAS and DeepEval on golden datasets, gating releases with regression evals in CI/CD to catch hallucination risks before production.</li>
+                <li data-lane="s" data-gate>Implemented <strong>AI guardrails</strong> for PII redaction, prompt injection detection and hallucination detection, producing audit-ready evidence for AI governance and model risk management reviews.</li>
+                <li data-lane="c">Optimized LLM inference with semantic caching, request batching and model routing, reducing compute costs by <strong>22%</strong> with no measurable quality loss.</li>
+              </ul>
+              <p class="stack">Python · LangChain · LangGraph · Azure OpenAI · FastAPI · Kafka · Redis · LangSmith · RAGAS · DeepEval</p>
+            </div>
+            <div class="figs">
+              <figure class="chart">
+                <figcaption><strong>Measured change</strong>Indexed to 100 before each change. Each pair has its own scale.</figcaption>
+                <div class="pair" style="--lane: var(--i)">
+                  <p class="pt">Response relevance <b>+40%</b></p>
+                  <dl>
+                    <div class="was" style="--v: 0.6667"><dt>Before</dt><dd><i></i><span>100</span></dd></div>
+                    <div class="now" style="--v: 0.9333"><dt>After</dt><dd><i></i><span>140</span></dd></div>
+                  </dl>
+                  <p class="ax" aria-hidden="true"><span>0</span><span>150</span></p>
+                </div>
+                <div class="pair" style="--lane: var(--i)">
+                  <p class="pt">Manual review effort <b>65% less</b></p>
+                  <dl>
+                    <div class="was" style="--v: 1"><dt>Before</dt><dd><i></i><span>100</span></dd></div>
+                    <div class="now" style="--v: 0.35"><dt>After</dt><dd><i></i><span>35</span></dd></div>
+                  </dl>
+                  <p class="ax" aria-hidden="true"><span>0</span><span>100</span></p>
+                </div>
+                <div class="pair" style="--lane: var(--c)">
+                  <p class="pt">Inference compute cost <b>22% less</b></p>
+                  <dl>
+                    <div class="was" style="--v: 1"><dt>Before</dt><dd><i></i><span>100</span></dd></div>
+                    <div class="now" style="--v: 0.78"><dt>After</dt><dd><i></i><span>78</span></dd></div>
+                  </dl>
+                  <p class="ax" aria-hidden="true"><span>0</span><span>100</span></p>
+                </div>
+              </figure>
+              <figure class="chart" style="--lane: var(--i)">
+                <figcaption><strong>How a question is answered</strong>In order, from the analyst to a checked answer.</figcaption>
+                <ol class="route"><li>Guardrails screen the input for PII and prompt injection</li><li>Hybrid search over 500K+ documents: BM25 plus embeddings</li><li>Cross-encoder reranking picks the best context</li><li>LangGraph agents draft, with a human approval checkpoint</li><li>Output checks and regression evals gate every release</li></ol>
+              </figure>
+            </div>
+          </article>
+          <article class="role" id="x-lakshyaa" data-lanes="a i s">
+            <header>
+              <h3>Founder, R&amp;D</h3>
+              <p class="org">Lakshyaa.ai<span>Part-time, self-employed</span></p>
+              <p class="when">Jul 2026 – present · Remote</p>
+              <p class="lines"></p>
+            </header>
+            <div>
+              <p class="lead">A multi-agent decision-support system that ranks cash recommendations, built on a hybrid LLM and deterministic core so the financial numbers stay auditable.</p>
+              <ul class="points">
+                <li data-lane="i">Architected a <strong>six-agent decision-support system</strong> on <strong>Google Vertex AI</strong> with Gemini, using a supervisor agent to coordinate four specialist agents and a risk-assessment agent for multi-agent orchestration, delivering ranked cash recommendations at about <strong>$0.07 per query</strong>.</li>
+                <li data-lane="a">Built a Python cash-forecasting and plan-search engine that generates, scores, and ranks candidate plans against business constraints, evaluating <strong>5,000 plans in 1.3 seconds</strong> or less and passing <strong>38 of 39</strong> audited test cases.</li>
+                <li data-lane="s" data-gate>Designed a hybrid LLM and deterministic architecture, using Gemini for intent interpretation and strict numerical parsers to map spreadsheet data into <strong>31 input variables and 47 KPIs</strong>, eliminating LLM arithmetic errors and keeping financial outputs auditable.</li>
+                <li data-lane="i" data-gate>Built an eval-driven development framework with a <strong>40-seed benchmark</strong>, a 20-question agent evaluation set, trace-level review, and <strong>340 automated test files</strong>, and applied context engineering to cut agent context by <strong>94%</strong>, lowering token cost and latency.</li>
+              </ul>
+              <p class="stack">Python · Google Vertex AI · Gemini · Multi-agent orchestration · Context engineering · Evals</p>
+            </div>
+            <div class="figs">
+              <figure class="chart">
+                <figcaption><strong>Measured change</strong>Indexed to 100 before context engineering.</figcaption>
+                <div class="pair" style="--lane: var(--i)">
+                  <p class="pt">Agent context size <b>94% less</b></p>
+                  <dl>
+                    <div class="was" style="--v: 1"><dt>Before</dt><dd><i></i><span>100</span></dd></div>
+                    <div class="now" style="--v: 0.06"><dt>After</dt><dd><i></i><span>6</span></dd></div>
+                  </dl>
+                  <p class="ax" aria-hidden="true"><span>0</span><span>100</span></p>
+                </div>
+              </figure>
+              <figure class="chart" style="--lane: var(--a)">
+                <figcaption><strong>The engine by the numbers</strong>One mark each.</figcaption>
+                <div class="tally" style="--n: 6"><p>Agents <b>6</b></p><span class="stops" aria-hidden="true"></span></div>
+                <div class="tally" style="--n: 39"><p>Audited test cases passed <b>38 of 39</b></p><span class="stops" aria-hidden="true"></span></div>
+                <div class="tally" style="--n: 47"><p>KPIs computed deterministically <b>47</b></p><span class="stops" aria-hidden="true"></span></div>
+              </figure>
+              <figure class="chart" style="--lane: var(--i)">
+                <figcaption><strong>How a recommendation is made</strong>In order, from the spreadsheet to a ranked answer.</figcaption>
+                <ol class="route"><li>Gemini interprets the request</li><li>Strict parsers map the data into 31 inputs and 47 KPIs</li><li>A supervisor agent briefs four specialist agents</li><li>The plan-search engine scores 5,000 plans in 1.3 s or less</li><li>A risk-assessment agent checks the ranked options</li></ol>
+              </figure>
+            </div>
+          </article>
+          <article class="role" id="x-accenture" data-lanes="a i c s">
+            <header>
+              <h3>AI Engineer</h3>
+              <p class="org">Accenture<span>India</span></p>
+              <p class="when">May 2022 – Jul 2024</p>
+              <p class="lines"></p>
+            </header>
+            <div>
+              <p class="lead">Semantic search, transformer models and fraud detection, plus the data and MLOps pipelines behind them.</p>
+              <ul class="points">
+                <li data-lane="i">Built <strong>semantic search</strong> pipelines with embeddings, vector databases and REST APIs, improving retrieval accuracy by <strong>35%</strong> and reducing search latency by <strong>30%</strong>.</li>
+                <li data-lane="i">Fine-tuned <strong>BERT and DistilBERT</strong> with Hugging Face Transformers and PyTorch for document classification and information extraction, reducing manual review effort by <strong>45%</strong>.</li>
+                <li data-lane="a">Developed <strong>fraud and anomaly detection</strong> models using XGBoost, Scikit-learn, feature engineering and threshold tuning, improving risk identification by <strong>28%</strong> and reducing false-positive alerts by <strong>20%</strong>.</li>
+                <li data-lane="a">Engineered scalable ETL and ML data pipelines with <strong>PySpark and Apache Airflow</strong>, processing <strong>15M+ records monthly</strong> into model-ready datasets.</li>
+                <li data-lane="c">Automated model deployment with <strong>Docker</strong> and <strong>Kubernetes on AWS</strong> and standardized CI/CD release pipelines, shortening release cycles from days to hours.</li>
+                <li data-lane="c" data-gate>Implemented <strong>MLOps</strong> workflows with MLflow experiment tracking, model versioning and Airflow-orchestrated retraining on AWS, reducing update cycles by <strong>35%</strong>.</li>
+                <li data-lane="s">Developed Python REST APIs and ML inference services with input validation and error handling for real-time model predictions.</li>
+              </ul>
+              <p class="stack">Python · PyTorch · Hugging Face · XGBoost · PySpark · Airflow · MLflow · Docker · Kubernetes · AWS</p>
+            </div>
+            <div class="figs">
+              <figure class="chart">
+                <figcaption><strong>Measured change</strong>Indexed to 100 before each change. Each pair has its own scale.</figcaption>
+                <div class="pair" style="--lane: var(--i)">
+                  <p class="pt">Search latency <b>30% less</b></p>
+                  <dl>
+                    <div class="was" style="--v: 1"><dt>Before</dt><dd><i></i><span>100</span></dd></div>
+                    <div class="now" style="--v: 0.7"><dt>After</dt><dd><i></i><span>70</span></dd></div>
+                  </dl>
+                  <p class="ax" aria-hidden="true"><span>0</span><span>100</span></p>
+                </div>
+                <div class="pair" style="--lane: var(--i)">
+                  <p class="pt">Manual review effort <b>45% less</b></p>
+                  <dl>
+                    <div class="was" style="--v: 1"><dt>Before</dt><dd><i></i><span>100</span></dd></div>
+                    <div class="now" style="--v: 0.55"><dt>After</dt><dd><i></i><span>55</span></dd></div>
+                  </dl>
+                  <p class="ax" aria-hidden="true"><span>0</span><span>100</span></p>
+                </div>
+                <div class="pair" style="--lane: var(--a)">
+                  <p class="pt">False-positive fraud alerts <b>20% less</b></p>
+                  <dl>
+                    <div class="was" style="--v: 1"><dt>Before</dt><dd><i></i><span>100</span></dd></div>
+                    <div class="now" style="--v: 0.8"><dt>After</dt><dd><i></i><span>80</span></dd></div>
+                  </dl>
+                  <p class="ax" aria-hidden="true"><span>0</span><span>100</span></p>
+                </div>
+              </figure>
+              <figure class="chart" style="--lane: var(--c)">
+                <figcaption><strong>The model lifecycle</strong>In order, from raw records to a model in production.</figcaption>
+                <ol class="route"><li>PySpark and Airflow ETL over 15M+ records a month</li><li>Train and track experiments in MLflow</li><li>Package the model in Docker</li><li>Deploy to Kubernetes on AWS through CI/CD</li><li>Retrain on schedule with Airflow</li></ol>
+              </figure>
+            </div>
+          </article>
+        </section>
+
+        <section id="projects">
+          <h2>Projects</h2>
+          <ol class="projects">
+            <li class="project" id="p-research" data-lanes="a i c s">
+              <div>
+                <h3>AI Research Desk</h3>
+                <p class="meta">Autonomous equity research · 2025</p>
+                <p class="lines"></p>
+              </div>
+              <div class="text">
+                <p>An agent team that researches public companies like an analyst desk. It streams SEC filings, earnings calls and FRED macro data into <strong>hybrid search</strong> and a <strong>temporal knowledge graph</strong>, then eight <strong>LangGraph</strong> agents (planner, fundamentals, transcripts, risk, quant, bull, bear, critic) write a cited research note. Every number comes from a sandboxed Python tool, never the LLM, and a 500-question eval suite gates every release in CI.</p>
+                <p class="stack">Python · LangGraph · MCP · Qdrant · Neo4j · Redpanda · FastAPI · Next.js · Ragas · DeepEval · Langfuse</p>
+                <figure class="chart">
+                  <figcaption><strong>Target metrics</strong>Build targets, not results yet. Replaced with measured numbers when the project ships.</figcaption>
+                  <div class="pair" style="--lane: var(--i)">
+                    <p class="pt">Citation precision <b>target 95%</b></p>
+                    <dl>
+                      <div class="was" style="--v: 0.8"><dt>Baseline RAG</dt><dd><i></i><span>80%</span></dd></div>
+                      <div class="now" style="--v: 0.95"><dt>Target</dt><dd><i></i><span>95%</span></dd></div>
+                    </dl>
+                    <p class="ax" aria-hidden="true"><span>0</span><span>100%</span></p>
+                  </div>
+                  <div class="pair" style="--lane: var(--i)">
+                    <p class="pt">Retrieval recall@10 <b>hybrid + rerank</b></p>
+                    <dl>
+                      <div class="was" style="--v: 0.7"><dt>Vector only</dt><dd><i></i><span>70%</span></dd></div>
+                      <div class="now" style="--v: 0.9"><dt>Target</dt><dd><i></i><span>90%</span></dd></div>
+                    </dl>
+                    <p class="ax" aria-hidden="true"><span>0</span><span>100%</span></p>
+                  </div>
+                </figure>
+              </div>
+            </li>
+            <li class="project" id="p-gateway" data-lanes="i c s">
+              <div>
+                <h3>LLM Serving &amp; Routing Gateway</h3>
+                <p class="meta">AI infrastructure · 2025</p>
+                <p class="lines"></p>
+              </div>
+              <div class="text">
+                <p>An OpenAI-compatible gateway that sends each request to the cheapest model that will answer it correctly. A <strong>learned router</strong> works across Groq, Gemini, OpenRouter and local Ollama, with a <strong>semantic cache</strong>, PII redaction, a trained <strong>prompt-injection classifier</strong>, failover with circuit breakers, tenant budgets, and OpenTelemetry tracing end to end.</p>
+                <p class="stack">Python · FastAPI · LiteLLM · Redis · Presidio · DeBERTa · Postgres · OpenTelemetry · Prometheus · Grafana · Docker</p>
+                <figure class="chart">
+                  <figcaption><strong>Target metrics</strong>Build targets, not results yet. Replaced with measured numbers when the project ships.</figcaption>
+                  <div class="pair" style="--lane: var(--c)">
+                    <p class="pt">Cost per 1K requests, indexed <b>target 40% less</b></p>
+                    <dl>
+                      <div class="was" style="--v: 1"><dt>Always large model</dt><dd><i></i><span>100</span></dd></div>
+                      <div class="now" style="--v: 0.6"><dt>Target</dt><dd><i></i><span>60</span></dd></div>
+                    </dl>
+                    <p class="ax" aria-hidden="true"><span>0</span><span>100</span></p>
+                  </div>
+                  <div class="pair" style="--lane: var(--c)">
+                    <p class="pt">Gateway overhead, p95 <b>target under 50 ms</b></p>
+                    <dl>
+                      <div class="was" style="--v: 0.8"><dt>Naive proxy</dt><dd><i></i><span>120 ms</span></dd></div>
+                      <div class="now" style="--v: 0.333"><dt>Target</dt><dd><i></i><span>50 ms</span></dd></div>
+                    </dl>
+                    <p class="ax" aria-hidden="true"><span>0</span><span>150 ms</span></p>
+                  </div>
+                </figure>
+              </div>
+            </li>
+            <li class="project" id="p-docs" data-lanes="a i c s">
+              <div>
+                <h3>Self-Improving Document Intelligence</h3>
+                <p class="meta">Document AI + MLOps · 2025</p>
+                <p class="lines"></p>
+              </div>
+              <div class="text">
+                <p>Reads messy financial documents (scans, forms, statements) into validated Pydantic schemas, with cross-document checks such as wages against pay stubs. Low-confidence fields go to a review UI, and the corrections <strong>fine-tune a small open model with QLoRA</strong>. A champion/challenger gate in MLflow promotes the new model only when it wins on a frozen test set.</p>
+                <p class="stack">Python · PaddleOCR · LayoutLMv3 · Unsloth / QLoRA · Ollama · Pydantic · Celery · MLflow · DVC · Evidently · React</p>
+                <figure class="chart">
+                  <figcaption><strong>Target metrics</strong>Build targets, not results yet. Replaced with measured numbers when the project ships.</figcaption>
+                  <div class="pair" style="--lane: var(--i)">
+                    <p class="pt">Human review rate <b>target 60% less</b></p>
+                    <dl>
+                      <div class="was" style="--v: 1"><dt>Cycle 0</dt><dd><i></i><span>100</span></dd></div>
+                      <div class="now" style="--v: 0.4"><dt>Target</dt><dd><i></i><span>40</span></dd></div>
+                    </dl>
+                    <p class="ax" aria-hidden="true"><span>0</span><span>100</span></p>
+                  </div>
+                  <div class="pair" style="--lane: var(--i)">
+                    <p class="pt">Field-level F1, fine-tuned 3B model <b>target</b></p>
+                    <dl>
+                      <div class="was" style="--v: 0.72"><dt>Zero-shot 3B</dt><dd><i></i><span>0.72</span></dd></div>
+                      <div class="now" style="--v: 0.9"><dt>Target</dt><dd><i></i><span>0.90</span></dd></div>
+                    </dl>
+                    <p class="ax" aria-hidden="true"><span>0</span><span>1.0</span></p>
+                  </div>
+                </figure>
+              </div>
+            </li>
+            <li class="project" id="p-lab" data-lanes="i c s">
+              <div>
+                <h3>Agent Reliability Lab</h3>
+                <p class="meta">AI quality · 2025</p>
+                <p class="lines"></p>
+              </div>
+              <div class="text">
+                <p>Chaos engineering for AI agents. Plug in any LangGraph, MCP or HTTP agent, and the lab attacks it with <strong>simulated users</strong>, direct and indirect <strong>prompt injections</strong>, broken and slow tools, and poisoned documents. It scores success, safety and cost with deterministic checks plus calibrated LLM judges and confidence intervals, and a <strong>GitHub Action blocks the deploy</strong> on a real regression.</p>
+                <p class="stack">Python · asyncio · MCP · LangGraph · OpenTelemetry · Langfuse · scipy · GitHub Actions · PyPI</p>
+                <figure class="chart">
+                  <figcaption><strong>Target metrics</strong>Build targets, not results yet. Replaced with measured numbers when the project ships.</figcaption>
+                  <div class="pair" style="--lane: var(--s)">
+                    <p class="pt">Judge agreement with human labels <b>target 90%</b></p>
+                    <dl>
+                      <div class="was" style="--v: 0.7"><dt>Untuned judge</dt><dd><i></i><span>70%</span></dd></div>
+                      <div class="now" style="--v: 0.9"><dt>Target</dt><dd><i></i><span>90%</span></dd></div>
+                    </dl>
+                    <p class="ax" aria-hidden="true"><span>0</span><span>100%</span></p>
+                  </div>
+                  <div class="pair" style="--lane: var(--s)">
+                    <p class="pt">Scenario library <b>target 500</b></p>
+                    <dl>
+                      <div class="was" style="--v: 0.2"><dt>Seed set</dt><dd><i></i><span>100</span></dd></div>
+                      <div class="now" style="--v: 1"><dt>Target</dt><dd><i></i><span>500</span></dd></div>
+                    </dl>
+                    <p class="ax" aria-hidden="true"><span>0</span><span>500</span></p>
+                  </div>
+                </figure>
+              </div>
+            </li>
+            <li class="project" id="p-finance" data-lanes="a i c s">
+              <div>
+                <h3>Finance OS</h3>
+                <p class="meta">End-to-end finance data platform · 2026</p>
+                <p class="lines"></p>
+              </div>
+              <div class="text">
+                <p>Built one trusted view of a simulated AI company's finances, bringing the ledger, Stripe billing, payroll, cloud spend, CRM and <strong>196M+ API usage records</strong> into a governed dbt warehouse on DuckDB and BigQuery. Every KPI has one definition and traces from dashboard to journal line. Variances split automatically into volume, price and mix, and the month-end close runs <strong>19 reconciliation checks</strong>. Backtested ML models flag about <strong>$127K of ARR</strong> at churn risk, and a Gemini assistant answers in plain English from the company's own data, citing every source. The platform processes about <strong>795M rows</strong>, with DuckDB and BigQuery matching across <strong>175 models</strong>.</p>
+                <p class="stack">Python · dbt · DuckDB · BigQuery · scikit-learn · statsmodels · React · Gemini (Vertex AI) · Docker · Cloud Run · GitHub Actions</p>
+                <figure class="chart">
+                  <div class="pair" style="--lane: var(--i)">
+                    <p class="pt">Churn model ROC AUC, vs. old rules <b>+0.18</b></p>
+                    <dl>
+                      <div class="was" style="--v: 0.54"><dt>Rules</dt><dd><i></i><span>0.54</span></dd></div>
+                      <div class="now" style="--v: 0.72"><dt>Model</dt><dd><i></i><span>0.72</span></dd></div>
+                    </dl>
+                    <p class="ax" aria-hidden="true"><span>0</span><span>1.0</span></p>
+                  </div>
+                </figure>
+                <a class="more-link" href="https://finance-os-905768726552.us-central1.run.app" target="_blank" rel="noopener">Live demo <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5" /></svg></a>
+                <a class="more-link" href="https://github.com/sivram04/finance-os" target="_blank" rel="noopener">GitHub <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5" /></svg></a>
+              </div>
+            </li>
+            <li class="project" id="p-outreach" data-lanes="a i c s">
+              <div>
+                <h3>AI Outreach Platform</h3>
+                <p class="meta">Full-stack AI + analytics app</p>
+                <p class="lines"></p>
+              </div>
+              <div class="text">
+                <p>Built an <strong>A/B experimentation and funnel-analytics</strong> platform (variant assignment, significance gating, and open, click, reply and opt-out tracking via Pub/Sub) on Cloud Run and Vertex AI, lifting reply rate from <strong>4% to 11%</strong> across <strong>1,400 leads</strong>.</p>
+                <p class="stack">Python · React / TypeScript · Google Cloud</p>
+                <figure class="chart">
+                  <div class="pair" style="--lane: var(--a)">
+                    <p class="pt">Reply rate, across 1,400 leads <b>+7 points</b></p>
+                    <dl>
+                      <div class="was" style="--v: 0.2667"><dt>Before</dt><dd><i></i><span>4%</span></dd></div>
+                      <div class="now" style="--v: 0.7333"><dt>After</dt><dd><i></i><span>11%</span></dd></div>
+                    </dl>
+                    <p class="ax" aria-hidden="true"><span>0</span><span>15%</span></p>
+                  </div>
+                </figure>
+              </div>
+            </li>
+            <li class="project" id="p-port" data-lanes="a c s">
+              <div>
+                <h3>Traffic Demand Forecasting &amp; Analytics (Port Authority of NY &amp; NJ)</h3>
+                <p class="meta">Forecasting · Aug – Dec 2025</p>
+                <p class="lines"></p>
+              </div>
+              <div class="text">
+                <p>Built a SQL and Python pipeline over <strong>11+ years</strong> of transportation data (<strong>81M+ toll-violation records</strong> across 8 bridges and tunnels), then trained <strong>Azure AutoML</strong> models into a self-service app that produces facility-level demand forecasts through 2028.</p>
+                <p class="stack">SQL · Python · Azure AutoML</p>
+                <a class="more-link" href="https://github.com/sivram04/Port-Authority-NY-NJ-Bus-terminal-main-Using-sql-and-python-" target="_blank" rel="noopener">GitHub <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5" /></svg></a>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section id="certificates">
+          <h2>Certificates</h2>
+          <ul class="certs">
+            <li class="cert" data-lanes="i">
+              <button class="thumb" data-cert="assets/Sap%20genrative%20Ai%20developer%20certificate%20.jpg" data-title="SAP Generative AI Developer" aria-label="View the SAP Generative AI Developer certificate"><img loading="lazy" src="assets/Sap%20genrative%20Ai%20developer%20certificate%20.jpg" alt="" /></button>
+              <div>
+                <h3>SAP Certified Associate: SAP Generative AI Developer (C_IG_2412)</h3>
+                <p class="meta">SAP · Feb 2026</p>
+                <p class="lines"></p>
+              </div>
+            </li>
+            <li class="cert" data-lanes="a">
+              <button class="thumb" data-cert="assets/Sap_certified_SAC.jpg" data-title="SAP Analytics Cloud, Data Analyst" aria-label="View the SAP Analytics Cloud certificate"><img loading="lazy" src="assets/Sap_certified_SAC.jpg" alt="" /></button>
+              <div>
+                <h3>SAP Certified Associate: Data Analyst, SAP Analytics Cloud</h3>
+                <p class="meta">SAP · Mar 2026</p>
+                <p class="lines"></p>
+              </div>
+            </li>
+            <li class="cert" data-lanes="a">
+              <button class="thumb" data-cert="assets/Google%20analytics.jpg" data-title="Google Advanced Data Analytics" aria-label="View the Google Advanced Data Analytics certificate"><img loading="lazy" src="assets/Google%20analytics.jpg" alt="" /></button>
+              <div>
+                <h3>Google Advanced Data Analytics Professional Certificate</h3>
+                <p class="meta">Google · Jan 2026</p>
+                <p class="lines"></p>
+              </div>
+            </li>
+          </ul>
+          <h3 class="more-head">Also completed</h3>
+          <ul class="more">
+            <li><div>Sourcing &amp; Procurement<span>SAP S/4HANA</span></div><button class="view" data-cert="assets/Sap_sourcing%20and%20procurement.png" data-title="Sourcing &amp; Procurement">View</button></li>
+            <li><div>Data Analytics &amp; Visualization, job simulation<span>Accenture / Forage</span></div><button class="view" data-cert="assets/Accenture_Forage%20.jpg" data-title="Data Analytics &amp; Visualization">View</button></li>
+            <li><div>Data Visualisation for Business, job simulation<span>TCS / Forage</span></div><button class="view" data-cert="assets/TCS_Forage.jpg" data-title="Data Visualisation for Business">View</button></li>
+            <li><div>Technical Consulting, job simulation<span>SAP / Forage</span></div><button class="view" data-cert="assets/Sap_Forage.jpg" data-title="Technical Consulting">View</button></li>
+            <li><div>Business Analysis Essentials<span>Microsoft &amp; LinkedIn</span></div><button class="view" data-cert="assets/Linkedin_certificate.jpg" data-title="Business Analysis Essentials">View</button></li>
+          </ul>
+        </section>
+
+        <section id="voluntary">
+          <h2>Voluntary</h2>
+          <article class="role" data-lanes="a">
+            <header>
+              <h3>E-Board Member &amp; Market Research Analyst</h3>
+              <p class="org">University of New Haven Consulting Club<span>West Haven, CT</span></p>
+              <p class="when">Jan 2025 – Dec 2025</p>
+            </header>
+            <div>
+              <p class="lead">Selected as <strong>1 of 7 executive board members</strong> to launch the consulting club and grow it to <strong>90+ members within one semester</strong>, supporting member recruitment and organizational planning.</p>
+            </div>
+            <div class="figs">
+              <figure class="chart" style="--lane: var(--a)">
+                <figcaption><strong>The club in its first semester</strong>University of New Haven Consulting Club. One mark each.</figcaption>
+                <div class="tally" style="--n: 7"><p>Executive board <b>1 of 7</b></p><span class="stops one" aria-hidden="true"></span></div>
+                <div class="tally"><p>Members <b>90+</b></p><canvas class="units" data-n="90" role="img" aria-label="Ninety squares, one per member"></canvas></div>
+              </figure>
+            </div>
+          </article>
+        </section>
+
+        <section id="contact" class="end">
+          <div>
+          <h2 id="terminus" data-lanes="a i c s">Have a role or a problem in mind?</h2>
+          <p>I am looking for AI engineering roles. If you have one, or a problem that needs solving, write to me.</p>
+          <div class="actions">
+            <a class="btn solid" href="mailto:sivmm29@gmail.com">sivmm29@gmail.com</a>
+            <a class="btn line" href="https://www.linkedin.com/in/sivaramvangavolu/" target="_blank" rel="noopener">LinkedIn <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5" /></svg></a>
+            <a class="btn line" href="https://github.com/sivram04" target="_blank" rel="noopener">GitHub <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5" /></svg></a>
+            <a class="btn line" href="assets/Sivaram_Resume.pdf" target="_blank" rel="noopener">Résumé <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5" /></svg></a>
+          </div>
+          </div>
+          <form class="form" id="contactForm" action="https://formspree.io/f/xeoywnwl" method="POST">
+            <div class="two">
+              <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required /></div>
+              <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+            </div>
+            <div class="field"><label for="subject">Subject</label><input id="subject" name="subject" required /></div>
+            <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="4" required></textarea></div>
+            <button class="btn solid" type="submit">Send message</button>
+            <output id="formStatus" role="status" aria-live="polite"></output>
+          </form>
+        </section>
+      </main>
+      <footer>
+        <span>© 2026 Sivaram Vangavolu</span>
+        <a href="#top">Back to top</a>
+      </footer>
+    </div>
+
+    <dialog id="viewer" aria-labelledby="viewerTitle">
+      <div class="sheet">
+        <h2 id="viewerTitle">Certificate</h2>
+        <button type="button">Close</button>
+        <img alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+      </div>
+    </dialog>
+  </body>
+</html>
