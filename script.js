@@ -235,7 +235,7 @@ form.addEventListener("submit", async (e) => {
     note.textContent = "Message sent. Thank you, I will reply soon.";
     form.reset();
   } catch {
-    note.textContent = "That did not send. Please try again, or email sivmm29@gmail.com.";
+    note.textContent = "That did not send. Please try again, or email saisivaram35@gmail.com.";
   } finally {
     sending = false;
     send.disabled = false;
